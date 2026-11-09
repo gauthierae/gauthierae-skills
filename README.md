@@ -1,6 +1,6 @@
 # gauthierae-skills
 
-Skills by Gauthi Rae. Each folder holds one skill, with its own `README.md` and install steps.
+Skills by Gauthie Rae. Each folder holds one skill, with its own `README.md` and install steps.
 
 | Skill | What it does |
 |---|---|
