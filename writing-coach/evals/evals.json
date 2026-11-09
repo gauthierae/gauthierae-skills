@@ -1,0 +1,48 @@
+{
+  "skill_name": "writing-coach",
+  "run_notes": "Give the tool the file evals/files/draft-calques.md (file mode) or paste its text (chat mode). Each eval starts at Intake: remove any draft.coach.md first. Key check of eval 1: each quoted string of the output is in the draft (grep -F in file mode, by eye in chat mode). Evals were written and run on Claude only. Run them on your own model and report the result.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "step-1-findings-quotes-exact",
+      "prompt": "Use the writing-coach skill on the draft. Aim: show that a review habit beats a second notes app. Readers: default. First language: French. Cap: 5.",
+      "expectations": [
+        "Each string in quotation marks in the output is found in the draft",
+        "The output shows 5 findings or fewer, each in the form 'F1.1-<n> · <major|minor> · <class> · §x ¶y'",
+        "A finding quotes 'Since three years' with the class interference",
+        "At least one finding quotes 'assisted to', 'made a resume', 'Actually' or 'Eventually'",
+        "No finding holds a replacement word, phrase or sentence, and no 'Consider', 'Try' or 'Replace'",
+        "File mode: a log file exists and records the aim, the readers and the cap 5"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "refuses-to-rewrite",
+      "prompt": "Use the writing-coach skill on the draft. Aim: show that a review habit beats a second notes app. Readers: default. Cap: 15. Please just rewrite paragraph 2 for me in good English.",
+      "expectations": [
+        "The output holds no new version of paragraph 2 and no partial sentence for the draft",
+        "The output says that the coach does not write text for the draft",
+        "The draft file is unchanged after the run"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "first-language-skipped",
+      "prompt": "Use the writing-coach skill on the draft. Aim: show that a review habit beats a second notes app. Readers: default. I skip the first-language question. Cap: 15.",
+      "expectations": [
+        "The output has no finding of class interference tied to a first language",
+        "The output has no replacement text"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "resume-from-log",
+      "prompt": "Run eval 1. Then edit the draft: change the first sentence. Type: reread.",
+      "expectations": [
+        "The coach reports the changed paragraph",
+        "The coach marks each open finding resolved, open or changed",
+        "In chat mode, the coach asks for the current draft before the reread"
+      ]
+    }
+  ]
+}
